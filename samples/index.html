@@ -62,11 +62,36 @@
             background: var(--bg-card); border: 1px solid var(--border);
             border-radius: 10px; padding: 1.1rem 1.25rem;
             display: flex; justify-content: space-between; align-items: flex-start;
-            gap: 1rem; flex-wrap: wrap;
+            gap: 1.1rem; flex-wrap: wrap;
             transition: border-color 0.2s;
         }
         .sample-card:hover { border-color: var(--accent); }
-        .sample-card .sample-info { flex: 1; min-width: 240px; }
+        .sample-card .sample-info { flex: 1; min-width: 220px; }
+
+        /* Clickable preview thumbnails */
+        .sample-preview {
+            flex-shrink: 0;
+            width: 150px;
+            align-self: flex-start;
+        }
+        .sample-preview a {
+            display: block;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .sample-preview a:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+        .sample-preview img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
         .sample-card h3 {
             font-family: var(--font-heading); font-weight: 600;
             font-size: 1.02rem; color: #fff;
@@ -139,6 +164,7 @@
             .sample-card { flex-direction: column; align-items: stretch; }
             .sample-actions { width: 100%; }
             .sample-btn { flex: 1; justify-content: center; }
+            .sample-preview { width: 100%; max-width: 280px; align-self: center; }
         }
     </style>
 </head>
@@ -180,6 +206,11 @@
         <div class="sample-list">
 
             <article class="sample-card">
+                <div class="sample-preview">
+                    <a href="https://www.scribd.com/document/848289430/Rulestream-ETO-8-10-x-Teamcenter-Manager" target="_blank" rel="noopener noreferrer" aria-label="Open Teamcenter Manager">
+                        <img src="images/preview_teamcenter_manager.png" alt="Teamcenter Manager — page 1 preview" loading="lazy">
+                    </a>
+                </div>
                 <div class="sample-info">
                     <h3>Teamcenter Manager for Rulestream 8.10.0 — Integration Manual</h3>
                     <p>57-page integration manual covering the Teamcenter Manager component of Rulestream 8.10. Reference documentation written for engineers integrating Rulestream with Siemens' Teamcenter PLM platform.</p>
@@ -198,6 +229,11 @@
             </article>
 
             <article class="sample-card">
+                <div class="sample-preview">
+                    <a href="https://5.imimg.com/data5/NB/NS/TS/SELLER-85307908/engineering-automation-software-rulestream-siemens-plm-software.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open System Requirements v8.10">
+                        <img src="images/preview_system_requirements_v810.png" alt="Rulestream ETO System Requirements v8.10 — page 1 preview" loading="lazy">
+                    </a>
+                </div>
                 <div class="sample-info">
                     <h3>Rulestream ETO — System Requirements (v8.10)</h3>
                     <p>Technical reference document specifying the hardware, software, and environment requirements for deploying Rulestream ETO 8.10. The kind of "service manual / technical guide" content that supports field engineers and support teams.</p>
@@ -216,6 +252,11 @@
             </article>
 
             <article class="sample-card">
+                <div class="sample-preview">
+                    <a href="https://www.plm.automation.siemens.com/ru_ru/Images/19129_tcm802-87374.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Rulestream product brochure">
+                        <img src="images/preview_rulestream_brochure_siemens.png" alt="Rulestream Product Brochure — page 1 preview" loading="lazy">
+                    </a>
+                </div>
                 <div class="sample-info">
                     <h3>Rulestream software for Engineer-to-Order — Product Brochure</h3>
                     <p>Concise product-positioning document explaining Rulestream's value proposition for ETO manufacturers — sales, engineering, and manufacturing process automation. Hosted on Siemens' own domain.</p>
@@ -234,6 +275,11 @@
             </article>
 
             <article class="sample-card">
+                <div class="sample-preview">
+                    <a href="files/Siemens_Rulestream_Install_Guide.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Install Guide PDF">
+                        <img src="images/preview_install_guide.png" alt="Rulestream Install Guide — page 1 preview" loading="lazy">
+                    </a>
+                </div>
                 <div class="sample-info">
                     <h3>Rulestream ETO — Install Guide</h3>
                     <p>Step-by-step installation guide for the Rulestream platform, covering deployment procedures and dependencies. Direct download.</p>
@@ -263,6 +309,11 @@
 
         <div class="sample-list">
             <article class="sample-card">
+                <div class="sample-preview">
+                    <a href="files/OxygenXML_Sample_UserGuide_Beatstation.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Beatstation User Guide PDF">
+                        <img src="images/preview_beatstation.png" alt="Beatstation User Guide — page 1 preview" loading="lazy">
+                    </a>
+                </div>
                 <div class="sample-info">
                     <h3>Beatstation User Guide — Oxygen XML sample</h3>
                     <p>End-to-end user guide demonstrating structured authoring, information architecture, and styled publishing output. Authored entirely in Oxygen XML Editor.</p>
@@ -293,6 +344,11 @@
         <div class="sample-list">
 
             <article class="sample-card">
+                <div class="sample-preview">
+                    <a href="https://www.klenzaids.com/product-detailed-washing.html" target="_blank" rel="noopener noreferrer" aria-label="Open Klenzaids product page">
+                        <img src="images/preview_klenzaids_product.png" alt="Klenzaids industrial washing equipment — product preview" loading="lazy">
+                    </a>
+                </div>
                 <div class="sample-info">
                     <h3>Validation &amp; Operations Documentation — Klenzaids Industrial Equipment</h3>
                     <p>As Documentation Engineer at Klenzaids, I authored the validation lifecycle and operations documentation for industrial washing and cleanroom equipment: <strong>DQ</strong> (Design Qualification), <strong>IQ</strong> (Installation Qualification), <strong>OQ</strong> (Operational Qualification), <strong>PQ</strong> (Performance Qualification), and the <strong>OMM</strong> (Operation &amp; Maintenance Manual). Each document set ships with the machine to the client site and serves as the reference during the Factory Acceptance Test (FAT), installation, and ongoing maintenance.</p>
@@ -313,6 +369,11 @@
             </article>
 
             <article class="sample-card">
+                <div class="sample-preview">
+                    <a href="files/Klenzaids_Whitepaper_Pharmaceutical_IT.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Pharmaceutical IT whitepaper PDF">
+                        <img src="images/preview_klenzaids_whitepaper.png" alt="Pharmaceutical IT Trends whitepaper — page 1 preview" loading="lazy">
+                    </a>
+                </div>
                 <div class="sample-info">
                     <h3>Pharmaceutical Information Technology Trends — Whitepaper</h3>
                     <p>Whitepaper analyzing IT and digital-transformation trends in the pharmaceutical industry. Authored at Klenzaids, focused on a regulated-industry audience.</p>
