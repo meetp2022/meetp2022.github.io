@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Samples — Meet Patel</title>
+    <meta name="description" content="Selected technical documentation samples — Siemens Rulestream ETO product suite, structured authoring in Oxygen XML, industrial whitepapers, and academic research.">
+    <meta name="author" content="Meet Patel">
+    <meta property="og:title" content="Work Samples — Meet Patel">
+    <meta property="og:description" content="Selected technical documentation samples — Siemens Rulestream, structured authoring, industrial whitepapers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://meetp2022.github.io/samples/">
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2314b8a6'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' fill='white' font-family='system-ui' font-weight='700' font-size='18'>M</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* ——— Samples page tweaks ——— */
+        .samples-hero { padding: 7rem 0 2rem; }
+        .samples-hero .hero-label { margin-bottom: 1rem; }
+        .samples-hero h1 {
+            font-family: var(--font-heading); font-weight: 800;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            line-height: 1.15; color: #fff; margin-bottom: 0.75rem;
+        }
+        .samples-hero .lead {
+            font-size: 1.05rem; color: var(--text-muted);
+            max-width: 660px; line-height: 1.65;
+            margin-bottom: 1rem;
+        }
+        .samples-hero .meta-note {
+            font-size: 0.85rem; color: var(--text-muted);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            max-width: 660px;
+            margin-top: 1rem;
+        }
+        .samples-hero .meta-note strong { color: var(--text); }
+
+        .sample-section { padding: 2.5rem 0 1.5rem; border-top: 1px solid var(--border); }
+        .sample-section:first-of-type { border-top: none; }
+        .sample-section h2 {
+            font-family: var(--font-heading); font-weight: 700;
+            font-size: 1.5rem; color: #fff; margin-bottom: 0.4rem;
+        }
+        .sample-section .section-context {
+            font-size: 0.9rem; color: var(--text-muted);
+            margin-bottom: 1.5rem; line-height: 1.6;
+            max-width: 680px;
+        }
+
+        .sample-list {
+            display: flex; flex-direction: column;
+            gap: 0.85rem;
+        }
+        .sample-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 10px; padding: 1.1rem 1.25rem;
+            display: flex; justify-content: space-between; align-items: flex-start;
+            gap: 1rem; flex-wrap: wrap;
+            transition: border-color 0.2s;
+        }
+        .sample-card:hover { border-color: var(--accent); }
+        .sample-card .sample-info { flex: 1; min-width: 240px; }
+        .sample-card h3 {
+            font-family: var(--font-heading); font-weight: 600;
+            font-size: 1.02rem; color: #fff;
+            margin-bottom: 0.3rem;
+        }
+        .sample-card p {
+            font-size: 0.875rem; color: var(--text-muted);
+            margin: 0; line-height: 1.55;
+        }
+        .sample-card .sample-meta {
+            display: flex; gap: 0.5rem; flex-wrap: wrap;
+            margin-top: 0.55rem;
+        }
+        .sample-card .meta-pill {
+            font-size: 0.7rem; font-weight: 500;
+            padding: 0.18rem 0.5rem; border-radius: 100px;
+            background: var(--accent-dim); color: var(--accent);
+            text-transform: uppercase; letter-spacing: 0.04em;
+        }
+        .sample-card .meta-pill.host {
+            background: transparent; border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .sample-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+        .sample-btn {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            padding: 0.45rem 0.9rem; border-radius: 8px;
+            font-size: 0.825rem; font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .sample-btn.view {
+            background: var(--accent); color: #0a0a12;
+        }
+        .sample-btn.view:hover { opacity: 0.88; }
+        .sample-btn.download {
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            background: transparent;
+        }
+        .sample-btn.download:hover {
+            border-color: var(--accent); color: var(--accent);
+        }
+        .sample-btn svg { flex-shrink: 0; }
+
+        .contact-cta {
+            margin: 3rem 0 1rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+        }
+        .contact-cta p {
+            color: var(--text-muted); margin-bottom: 0.85rem;
+            font-size: 0.95rem;
+        }
+        .contact-cta a {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.55rem 1.1rem; border-radius: 8px;
+            font-size: 0.9rem; font-weight: 600;
+            background: var(--accent); color: #0a0a12;
+            text-decoration: none;
+        }
+        .contact-cta a:hover { opacity: 0.88; }
+
+        @media (max-width: 640px) {
+            .sample-card { flex-direction: column; align-items: stretch; }
+            .sample-actions { width: 100%; }
+            .sample-btn { flex: 1; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="container">
+        <a href="../" class="logo">meet<span>.</span></a>
+        <button class="mobile-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+        <ul class="nav-links">
+            <li><a href="../">Main portfolio</a></li>
+            <li><a href="../#work">Work</a></li>
+            <li><a href="mailto:meet.mvp74@gmail.com">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="samples-hero">
+    <div class="container">
+        <span class="hero-label">Work Samples</span>
+        <h1>Technical documentation samples</h1>
+        <p class="lead">A curated set of technical writing samples spanning the Siemens Rulestream Engineer-to-Order documentation suite (system requirements, integration manuals, install guides), structured authoring in Oxygen XML, an industrial whitepaper, and an academic mechanical-engineering paper.</p>
+        <div class="meta-note">
+            Most Siemens Rulestream documents below are <strong>publicly hosted by third parties</strong> (Siemens.com, Scribd, dealer distribution sites) — open the links to view them in their original form. The Beatstation user guide and Klenzaids whitepaper are downloadable directly.
+        </div>
+    </div>
+</header>
+
+<!-- SECTION 1: Siemens Rulestream -->
+<section class="sample-section">
+    <div class="container">
+        <h2>Siemens Rulestream ETO — Documentation Suite</h2>
+        <p class="section-context">
+            Rulestream Engineer-to-Order (ETO) is Siemens' platform for automating engineer-to-order processes — integrating with CAD, ERP, and PLM systems. I was the sole technical writer responsible for the documentation suite at Siemens (via Pratiti Technologies, 2020–2021), authoring in Oxygen XML and managing legacy content. Selected samples below.
+        </p>
+
+        <div class="sample-list">
+
+            <article class="sample-card">
+                <div class="sample-info">
+                    <h3>Teamcenter Manager for Rulestream 8.10.0 — Integration Manual</h3>
+                    <p>57-page integration manual covering the Teamcenter Manager component of Rulestream 8.10. Reference documentation written for engineers integrating Rulestream with Siemens' Teamcenter PLM platform.</p>
+                    <div class="sample-meta">
+                        <span class="meta-pill">Integration Manual</span>
+                        <span class="meta-pill">57 pages</span>
+                        <span class="meta-pill host">Hosted: Scribd</span>
+                    </div>
+                </div>
+                <div class="sample-actions">
+                    <a class="sample-btn view" href="https://www.scribd.com/document/848289430/Rulestream-ETO-8-10-x-Teamcenter-Manager" target="_blank" rel="noopener noreferrer">
+                        View
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                    </a>
+                </div>
+            </article>
+
+            <article class="sample-card">
+                <div class="sample-info">
+                    <h3>Rulestream ETO — System Requirements (v8.10)</h3>
+                    <p>Technical reference document specifying the hardware, software, and environment requirements for deploying Rulestream ETO 8.10. The kind of "service manual / technical guide" content that supports field engineers and support teams.</p>
+                    <div class="sample-meta">
+                        <span class="meta-pill">System Requirements</span>
+                        <span class="meta-pill">7 pages</span>
+                        <span class="meta-pill host">Hosted: imimg.com</span>
+                    </div>
+                </div>
+                <div class="sample-actions">
+                    <a class="sample-btn view" href="https://5.imimg.com/data5/NB/NS/TS/SELLER-85307908/engineering-automation-software-rulestream-siemens-plm-software.pdf" target="_blank" rel="noopener noreferrer">
+                        View
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                    </a>
+                </div>
+            </article>
+
+            <article class="sample-card">
+                <div class="sample-info">
+                    <h3>Rulestream software for Engineer-to-Order — Product Brochure</h3>
+                    <p>Concise product-positioning document explaining Rulestream's value proposition for ETO manufacturers — sales, engineering, and manufacturing process automation. Hosted on Siemens' own domain.</p>
+                    <div class="sample-meta">
+                        <span class="meta-pill">Product Brochure</span>
+                        <span class="meta-pill">3 pages</span>
+                        <span class="meta-pill host">Hosted: siemens.com</span>
+                    </div>
+                </div>
+                <div class="sample-actions">
+                    <a class="sample-btn view" href="https://www.plm.automation.siemens.com/ru_ru/Images/19129_tcm802-87374.pdf" target="_blank" rel="noopener noreferrer">
+                        View
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                    </a>
+                </div>
+            </article>
+
+            <article class="sample-card">
+                <div class="sample-info">
+                    <h3>Rulestream ETO — Install Guide</h3>
+                    <p>Step-by-step installation guide for the Rulestream platform, covering deployment procedures and dependencies. Direct download.</p>
+                    <div class="sample-meta">
+                        <span class="meta-pill">Install Guide</span>
+                        <span class="meta-pill">PDF · 389 KB</span>
+                    </div>
+                </div>
+                <div class="sample-actions">
+                    <a class="sample-btn download" href="files/Siemens_Rulestream_Install_Guide.pdf" download>
+                        Download PDF
+                    </a>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 2: Structured Authoring -->
+<section class="sample-section">
+    <div class="container">
+        <h2>Structured Authoring — Oxygen XML</h2>
+        <p class="section-context">
+            A sample user guide authored in <strong>Oxygen XML Editor</strong> for a fictitious product ("Beatstation"), demonstrating structured topic-based authoring, modular content, and end-to-end publishing of a complete user guide. Created as a portfolio piece to showcase Oxygen XML proficiency outside of NDA-protected enterprise work.
+        </p>
+
+        <div class="sample-list">
+            <article class="sample-card">
+                <div class="sample-info">
+                    <h3>Beatstation User Guide — Oxygen XML sample</h3>
+                    <p>End-to-end user guide demonstrating structured authoring, information architecture, and styled publishing output. Authored entirely in Oxygen XML Editor.</p>
+                    <div class="sample-meta">
+                        <span class="meta-pill">User Guide</span>
+                        <span class="meta-pill">Oxygen XML</span>
+                        <span class="meta-pill">PDF · 121 KB</span>
+                    </div>
+                </div>
+                <div class="sample-actions">
+                    <a class="sample-btn download" href="files/OxygenXML_Sample_UserGuide_Beatstation.pdf" download>
+                        Download PDF
+                    </a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 3: Industrial & Academic -->
+<section class="sample-section">
+    <div class="container">
+        <h2>Industrial &amp; Academic Samples</h2>
+        <p class="section-context">
+            Domain-adjacent samples showing technical writing for regulated industries and academic mechanical-engineering work — useful context for hardware, manufacturing, and applied-engineering roles.
+        </p>
+
+        <div class="sample-list">
+
+            <article class="sample-card">
+                <div class="sample-info">
+                    <h3>Pharmaceutical Information Technology Trends — Whitepaper</h3>
+                    <p>Whitepaper analyzing IT and digital-transformation trends in the pharmaceutical industry. Authored at Klenzaids, focused on a regulated-industry audience.</p>
+                    <div class="sample-meta">
+                        <span class="meta-pill">Whitepaper</span>
+                        <span class="meta-pill">Klenzaids</span>
+                        <span class="meta-pill">PDF · 654 KB</span>
+                    </div>
+                </div>
+                <div class="sample-actions">
+                    <a class="sample-btn download" href="files/Klenzaids_Whitepaper_Pharmaceutical_IT.pdf" download>
+                        Download PDF
+                    </a>
+                </div>
+            </article>
+
+            <article class="sample-card">
+                <div class="sample-info">
+                    <h3>Topology Optimization and Stress Validation of the Hand Brake Lever</h3>
+                    <p>Academic research paper on mechanical engineering — topology optimization and finite-element stress analysis of an automotive hand brake lever. Published on ResearchGate.</p>
+                    <div class="sample-meta">
+                        <span class="meta-pill">Research Paper</span>
+                        <span class="meta-pill">Mechanical Engineering</span>
+                        <span class="meta-pill host">Hosted: ResearchGate</span>
+                    </div>
+                </div>
+                <div class="sample-actions">
+                    <a class="sample-btn view" href="https://www.researchgate.net/publication/321638358_Topology_Optimization_and_Stress_Validation_of_the_Hand_Brake_Lever" target="_blank" rel="noopener noreferrer">
+                        View
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                    </a>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="contact-cta">
+            <p>Want more context on any of these projects, or additional samples for a specific role?</p>
+            <a href="mailto:meet.mvp74@gmail.com">
+                meet.mvp74@gmail.com
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container footer-grid">
+        <div class="footer-left">
+            <p><strong style="color: var(--text)">Meet Patel</strong> · Dresden, Germany</p>
+            <p style="margin-top: 0.25rem;">Technical Writer · Documentation Engineer · Applied AI</p>
+        </div>
+        <div class="footer-links">
+            <a href="mailto:meet.mvp74@gmail.com">Email</a>
+            <a href="https://github.com/meetp2022" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/meet-patel-1b8160ab" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="../">Main portfolio</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
