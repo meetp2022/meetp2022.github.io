@@ -192,6 +192,82 @@ section p.section-desc {
     margin-top: 1.5rem; font-weight: 600; font-size: 0.95rem;
 }
 
+/* ——— HASHNODE POSTS PREVIEW (horizontal scroll) ——— */
+.hashnode-scroll {
+    display: flex; gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding-bottom: 1rem;
+    -webkit-overflow-scrolling: touch;
+    /* bleed to viewport edge on mobile so scroll feels natural */
+    margin: 0 calc(-1 * var(--px));
+    padding-left: var(--px);
+    padding-right: var(--px);
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
+.hashnode-scroll::-webkit-scrollbar { height: 8px; }
+.hashnode-scroll::-webkit-scrollbar-track { background: transparent; }
+.hashnode-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 100px; }
+.hashnode-scroll::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+.hashnode-card {
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    display: flex; flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none; color: var(--text);
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+}
+.hashnode-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px var(--accent-glow);
+    opacity: 1;
+}
+.hashnode-cover {
+    height: 140px;
+    background-color: var(--bg-raised);
+    background-size: cover; background-position: center;
+    background-image: linear-gradient(135deg, var(--accent-dim) 0%, var(--bg-raised) 100%);
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--border);
+}
+.hashnode-body {
+    padding: 1rem 1.1rem 1.1rem;
+    display: flex; flex-direction: column; flex: 1;
+}
+.hashnode-meta {
+    font-family: var(--font-heading);
+    font-size: 0.7rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+.hashnode-card h3 {
+    font-family: var(--font-heading);
+    font-weight: 600; font-size: 1rem;
+    color: #fff; line-height: 1.35;
+    margin-bottom: 0.5rem;
+}
+.hashnode-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+@media (max-width: 640px) {
+    .hashnode-card { flex: 0 0 260px; }
+    .hashnode-cover { height: 120px; }
+}
+
 /* ——— SKILLS ——— */
 .skills-group { margin-bottom: 1.5rem; }
 .skills-group h3 {

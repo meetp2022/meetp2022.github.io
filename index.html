@@ -138,21 +138,23 @@
 <section id="writing" class="section-alt">
     <div class="container">
         <p class="section-label">Writing &amp; Technical Content</p>
-        <h2>I write about documentation, RAG systems, and developer tooling</h2>
-        <ul class="writing-list">
-            <li class="reveal">
-                <a href="https://meetp2022.hashnode.dev/how-i-built-a-production-rag-pipeline-over-1500-regulated-documents" target="_blank" rel="noopener noreferrer">
-                    <div>
-                        <span>How I Built a Production RAG Pipeline Over 1,500 Regulated Documents</span>
-                        <div class="writing-meta">Architecture, chunking, retrieval, governance, and lessons learned</div>
-                    </div>
-                    <span class="arrow">→</span>
-                </a>
-            </li>
-            <!-- ADD NEW POSTS HERE — copy the <li> block above and update title, description, and URL -->
-        </ul>
+        <h2>Recent posts from Hashnode</h2>
+        <p class="section-desc">Long-form technical writing on RAG systems, documentation, and developer tooling. Cards below load live from Hashnode — scroll horizontally to browse.</p>
+
+        <div class="hashnode-scroll" id="hashnode-posts">
+            <!-- Static fallback — replaced by API data on load, kept if fetch fails. -->
+            <a class="hashnode-card" href="https://meetp2022.hashnode.dev/how-i-built-a-production-rag-pipeline-over-1500-regulated-documents" target="_blank" rel="noopener noreferrer">
+                <div class="hashnode-cover"></div>
+                <div class="hashnode-body">
+                    <div class="hashnode-meta">Featured</div>
+                    <h3>How I Built a Production RAG Pipeline Over 1,500 Regulated Documents</h3>
+                    <p>Architecture, chunking, retrieval, governance, and lessons learned from shipping an Azure OpenAI RAG system.</p>
+                </div>
+            </a>
+        </div>
+
         <a href="https://meetp2022.hashnode.dev/" target="_blank" rel="noopener noreferrer" class="hashnode-cta">
-            Read more on Hashnode <span>→</span>
+            More on Hashnode <span>→</span>
         </a>
     </div>
 </section>
@@ -286,6 +288,79 @@
 </footer>
 
 <script>
+    // ——— Fetch recent Hashnode posts via public GraphQL API ———
+    // Static fallback in the HTML is shown until this succeeds; kept if fetch fails.
+    (async function () {
+        var container = document.getElementById('hashnode-posts');
+        if (!container) return;
+
+        var query = 'query Posts($host: String!, $first: Int!) {' +
+            ' publication(host: $host) {' +
+            '  posts(first: $first) {' +
+            '   edges { node { title brief url publishedAt readTimeInMinutes coverImage { url } } }' +
+            '  }' +
+            ' }' +
+            '}';
+
+        try {
+            var res = await fetch('https://gql.hashnode.com/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    query: query,
+                    variables: { host: 'meetp2022.hashnode.dev', first: 6 }
+                })
+            });
+            if (!res.ok) return;
+            var data = await res.json();
+            var edges = (data && data.data && data.data.publication && data.data.publication.posts && data.data.publication.posts.edges) || [];
+            if (edges.length === 0) return;
+
+            // Replace fallback with API-driven cards (built via DOM APIs for safety)
+            container.textContent = '';
+            edges.forEach(function (edge) {
+                var node = edge.node;
+                var card = document.createElement('a');
+                card.className = 'hashnode-card';
+                card.href = node.url;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+
+                var cover = document.createElement('div');
+                cover.className = 'hashnode-cover';
+                if (node.coverImage && node.coverImage.url) {
+                    // JSON.stringify safely wraps in quotes + escapes for CSS url()
+                    cover.style.backgroundImage = 'url(' + JSON.stringify(node.coverImage.url) + ')';
+                }
+
+                var body = document.createElement('div');
+                body.className = 'hashnode-body';
+
+                var meta = document.createElement('div');
+                meta.className = 'hashnode-meta';
+                var date = new Date(node.publishedAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+                var readTime = node.readTimeInMinutes ? node.readTimeInMinutes + ' min · ' : '';
+                meta.textContent = readTime + date;
+
+                var h3 = document.createElement('h3');
+                h3.textContent = node.title;
+
+                var p = document.createElement('p');
+                p.textContent = node.brief || '';
+
+                body.appendChild(meta);
+                body.appendChild(h3);
+                body.appendChild(p);
+                card.appendChild(cover);
+                card.appendChild(body);
+                container.appendChild(card);
+            });
+        } catch (e) {
+            // Silent fail — static fallback remains visible
+        }
+    })();
+
+    // ——— Scroll-reveal for .reveal elements ———
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
     }, { threshold: 0.1 });
