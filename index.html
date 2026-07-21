@@ -139,16 +139,44 @@
     <div class="container">
         <p class="section-label">Writing &amp; Technical Content</p>
         <h2>Recent posts from Hashnode</h2>
-        <p class="section-desc">Long-form technical writing on RAG systems, documentation, and developer tooling. Cards below load live from Hashnode — scroll horizontally to browse.</p>
+        <p class="section-desc">Long-form technical writing on RAG systems, documentation, and developer tooling — published on Hashnode. Scroll horizontally to browse.</p>
 
         <div class="hashnode-scroll" id="hashnode-posts">
-            <!-- Static fallback — replaced by API data on load, kept if fetch fails. -->
-            <a class="hashnode-card" href="https://meetp2022.hashnode.dev/how-i-built-a-production-rag-pipeline-over-1500-regulated-documents" target="_blank" rel="noopener noreferrer">
-                <div class="hashnode-cover"></div>
+            <!-- Posts pulled from meetp2022.hashnode.dev. To add a new post, copy a card block and update the cover image, title, description, date, and href. -->
+
+            <a class="hashnode-card" href="https://meetp2022.hashnode.dev/my-rag-assistant-was-lying-to-me-about-having-a-memory" target="_blank" rel="noopener noreferrer">
+                <div class="hashnode-cover" style="background-image: url('https://cdn.hashnode.com/uploads/covers/6a1c1929d67543461066a96a/f312a7cd-6277-4aba-ae44-6f3d2c8ee841.png');"></div>
                 <div class="hashnode-body">
-                    <div class="hashnode-meta">Featured</div>
+                    <div class="hashnode-meta">Jul 2026</div>
+                    <h3>My RAG Assistant Was Lying to Me About Having a Memory</h3>
+                    <p>An "audit trail" that logged nothing — and rebuilding the RAG assistant's observability from scratch with Langfuse tracing.</p>
+                </div>
+            </a>
+
+            <a class="hashnode-card" href="https://meetp2022.hashnode.dev/i-built-an-ai-text-detector-that-doesn-t-call-any-apis-here-s-how-it-works" target="_blank" rel="noopener noreferrer">
+                <div class="hashnode-cover" style="background-image: url('https://cdn.hashnode.com/uploads/covers/6a1c1929d67543461066a96a/21335439-fb98-43d5-afaa-a88722e9a44d.png');"></div>
+                <div class="hashnode-body">
+                    <div class="hashnode-meta">Jul 2026</div>
+                    <h3>I Built an AI Text Detector That Doesn't Call Any APIs</h3>
+                    <p>A fine-tuned RoBERTa classifier, four statistical signals, and zero external dependencies — a detection system built from scratch.</p>
+                </div>
+            </a>
+
+            <a class="hashnode-card" href="https://meetp2022.hashnode.dev/my-ragas-scores-varied-between-runs-that-was-the-most-useful-finding-of-all" target="_blank" rel="noopener noreferrer">
+                <div class="hashnode-cover" style="background-image: url('https://cdn.hashnode.com/uploads/covers/6a1c1929d67543461066a96a/c0e4037b-4b8d-49af-adb6-e499af263e0a.png');"></div>
+                <div class="hashnode-body">
+                    <div class="hashnode-meta">Jun 2026</div>
+                    <h3>My RAGAS Scores Varied Between Runs. That Was the Most Useful Finding of All</h3>
+                    <p>Using RAGAS and Langfuse to evaluate a production RAG pipeline — real scores, honest variance, and three Azure-specific bugs fixed.</p>
+                </div>
+            </a>
+
+            <a class="hashnode-card" href="https://meetp2022.hashnode.dev/how-i-built-a-production-rag-pipeline-over-1-500-regulated-documents" target="_blank" rel="noopener noreferrer">
+                <div class="hashnode-cover" style="background-image: url('https://cdn.hashnode.com/uploads/covers/6a1c1929d67543461066a96a/7cc9c60f-aacb-4f0c-9e90-a6881ec8926c.png');"></div>
+                <div class="hashnode-body">
+                    <div class="hashnode-meta">May 2026</div>
                     <h3>How I Built a Production RAG Pipeline Over 1,500 Regulated Documents</h3>
-                    <p>Architecture, chunking, retrieval, governance, and lessons learned from shipping an Azure OpenAI RAG system.</p>
+                    <p>Architecture, chunking, retrieval, governance, and the lessons that separate a demo from a production Azure OpenAI RAG system.</p>
                 </div>
             </a>
         </div>
@@ -288,78 +316,6 @@
 </footer>
 
 <script>
-    // ——— Fetch recent Hashnode posts via public GraphQL API ———
-    // Static fallback in the HTML is shown until this succeeds; kept if fetch fails.
-    (async function () {
-        var container = document.getElementById('hashnode-posts');
-        if (!container) return;
-
-        var query = 'query Posts($host: String!, $first: Int!) {' +
-            ' publication(host: $host) {' +
-            '  posts(first: $first) {' +
-            '   edges { node { title brief url publishedAt readTimeInMinutes coverImage { url } } }' +
-            '  }' +
-            ' }' +
-            '}';
-
-        try {
-            var res = await fetch('https://gql.hashnode.com/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    query: query,
-                    variables: { host: 'meetp2022.hashnode.dev', first: 6 }
-                })
-            });
-            if (!res.ok) return;
-            var data = await res.json();
-            var edges = (data && data.data && data.data.publication && data.data.publication.posts && data.data.publication.posts.edges) || [];
-            if (edges.length === 0) return;
-
-            // Replace fallback with API-driven cards (built via DOM APIs for safety)
-            container.textContent = '';
-            edges.forEach(function (edge) {
-                var node = edge.node;
-                var card = document.createElement('a');
-                card.className = 'hashnode-card';
-                card.href = node.url;
-                card.target = '_blank';
-                card.rel = 'noopener noreferrer';
-
-                var cover = document.createElement('div');
-                cover.className = 'hashnode-cover';
-                if (node.coverImage && node.coverImage.url) {
-                    // JSON.stringify safely wraps in quotes + escapes for CSS url()
-                    cover.style.backgroundImage = 'url(' + JSON.stringify(node.coverImage.url) + ')';
-                }
-
-                var body = document.createElement('div');
-                body.className = 'hashnode-body';
-
-                var meta = document.createElement('div');
-                meta.className = 'hashnode-meta';
-                var date = new Date(node.publishedAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-                var readTime = node.readTimeInMinutes ? node.readTimeInMinutes + ' min · ' : '';
-                meta.textContent = readTime + date;
-
-                var h3 = document.createElement('h3');
-                h3.textContent = node.title;
-
-                var p = document.createElement('p');
-                p.textContent = node.brief || '';
-
-                body.appendChild(meta);
-                body.appendChild(h3);
-                body.appendChild(p);
-                card.appendChild(cover);
-                card.appendChild(body);
-                container.appendChild(card);
-            });
-        } catch (e) {
-            // Silent fail — static fallback remains visible
-        }
-    })();
-
     // ——— Scroll-reveal for .reveal elements ———
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
