@@ -23,7 +23,8 @@
         .samples-hero h1 {
             font-family: var(--font-heading); font-weight: 800;
             font-size: clamp(2rem, 4vw, 2.8rem);
-            line-height: 1.15; color: #fff; margin-bottom: 0.75rem;
+            line-height: 1.15; color: var(--text); margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
         }
         .samples-hero .lead {
             font-size: 1.05rem; color: var(--text-muted);
@@ -46,7 +47,8 @@
         .sample-section:first-of-type { border-top: none; }
         .sample-section h2 {
             font-family: var(--font-heading); font-weight: 700;
-            font-size: 1.5rem; color: #fff; margin-bottom: 0.4rem;
+            font-size: 1.5rem; color: var(--text); margin-bottom: 0.4rem;
+            letter-spacing: -0.01em;
         }
         .sample-section .section-context {
             font-size: 0.9rem; color: var(--text-muted);
@@ -60,12 +62,17 @@
         }
         .sample-card {
             background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 10px; padding: 1.1rem 1.25rem;
+            border-radius: 12px; padding: 1.1rem 1.25rem;
             display: flex; justify-content: space-between; align-items: flex-start;
             gap: 1.1rem; flex-wrap: wrap;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+            box-shadow: var(--shadow-sm);
         }
-        .sample-card:hover { border-color: var(--accent); }
+        .sample-card:hover {
+            border-color: rgba(13, 148, 136, 0.35);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
         .sample-card .sample-info { flex: 1; min-width: 220px; }
 
         /* Clickable preview thumbnails */
@@ -94,7 +101,7 @@
         }
         .sample-card h3 {
             font-family: var(--font-heading); font-weight: 600;
-            font-size: 1.02rem; color: #fff;
+            font-size: 1.02rem; color: var(--text);
             margin-bottom: 0.3rem;
         }
         .sample-card p {
@@ -106,9 +113,9 @@
             margin-top: 0.55rem;
         }
         .sample-card .meta-pill {
-            font-size: 0.7rem; font-weight: 500;
+            font-size: 0.7rem; font-weight: 600;
             padding: 0.18rem 0.5rem; border-radius: 100px;
-            background: var(--accent-dim); color: var(--accent);
+            background: var(--accent-dim); color: var(--accent-ink);
             text-transform: uppercase; letter-spacing: 0.04em;
         }
         .sample-card .meta-pill.host {
@@ -126,16 +133,19 @@
             white-space: nowrap;
         }
         .sample-btn.view {
-            background: var(--accent); color: #0a0a12;
+            background: linear-gradient(120deg, var(--accent) 0%, var(--accent-ink) 100%);
+            color: #ffffff;
+            box-shadow: var(--shadow-sm);
         }
-        .sample-btn.view:hover { opacity: 0.88; }
+        .sample-btn.view:hover { opacity: 0.92; transform: translateY(-1px); }
         .sample-btn.download {
             border: 1px solid var(--border);
-            color: var(--text-muted);
-            background: transparent;
+            color: var(--text);
+            background: var(--bg-card);
+            box-shadow: var(--shadow-sm);
         }
         .sample-btn.download:hover {
-            border-color: var(--accent); color: var(--accent);
+            border-color: var(--accent); color: var(--accent-ink);
         }
         .sample-btn svg { flex-shrink: 0; }
 
@@ -155,10 +165,12 @@
             display: inline-flex; align-items: center; gap: 0.4rem;
             padding: 0.55rem 1.1rem; border-radius: 8px;
             font-size: 0.9rem; font-weight: 600;
-            background: var(--accent); color: #0a0a12;
+            background: linear-gradient(120deg, var(--accent) 0%, var(--accent-ink) 100%);
+            color: #ffffff;
+            box-shadow: var(--shadow-sm);
             text-decoration: none;
         }
-        .contact-cta a:hover { opacity: 0.88; }
+        .contact-cta a:hover { opacity: 0.92; transform: translateY(-1px); }
 
         @media (max-width: 640px) {
             .sample-card { flex-direction: column; align-items: stretch; }

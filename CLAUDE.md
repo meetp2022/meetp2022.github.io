@@ -27,13 +27,17 @@ GitHub Pages portfolio for Meet Patel — Developer Educator & Applied AI, based
 
 ## Design System
 
-- **Theme:** Dark (#0a0a12 bg), teal accent (#14b8a6)
+- **Theme:** Light (white #ffffff bg, soft-gray #f4f7fa alt sections), teal accent
+- **Accent:** `--accent` #0d9488 (fills/borders), `--accent-ink` #0f766e (small text, AA-legible on white), `--accent-2` #0891b2 (gradient partner)
+- **Elevation:** soft layered shadows via `--shadow-sm` / `--shadow-md` / `--shadow-accent` (light themes use shadow for depth, not glow)
+- **Creative touches:** radial teal glow behind `.hero`, gradient hero `h1` (near-black → teal), gradient primary buttons, accent top-border on card hover
 - **Fonts:** Outfit (headings), DM Sans (body) — loaded from Google Fonts
 - **All styles in style.css** — subpages link to `../style.css`
-- **CSS variables:** All colors, fonts, spacing use :root vars
-- **Cards:** .card class with hover glow effect
-- **Tags/pills:** .tag (small, accent bg) and .pill (border, hover effect)
+- **CSS variables:** All colors, fonts, spacing, shadows use :root vars
+- **Cards:** .card class — soft shadow, lifts + accent top-bar on hover
+- **Tags/pills:** .tag (small, accent-dim bg + accent-ink text) and .pill (bordered, hover lift)
 - **Scroll reveal:** .reveal class + IntersectionObserver JS on index.html
+- **NOTE:** the `/ai/` page is intentionally dark (its own palette + toggle in `ai/ai-style.css`) — do not force it light.
 
 ## How to Add Content
 
