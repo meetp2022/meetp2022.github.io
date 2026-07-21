@@ -82,8 +82,8 @@ nav .nav-links a:hover { color: var(--accent-ink); opacity: 1; }
 
 /* ——— HERO ——— */
 .hero {
-    padding: 10rem 0 5rem;
-    min-height: 72vh;
+    padding: 8rem 0 3.5rem;
+    min-height: 56vh;
     display: flex; align-items: center;
     position: relative; overflow: hidden;
     background:
